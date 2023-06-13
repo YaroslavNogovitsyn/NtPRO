@@ -1,3 +1,20 @@
+from ntpro.extensions import MissedCommandName, UnknownCommand
+
+
+def parse(command_line: str) -> (str, list[str]):
+    """Получить название операции и ключевые слова со значениями"""
+
+    command_name, *command_args = commands = command_line.split(' -')
+
+    if not command_name:
+        raise MissedCommandName
+
+    if commands[0] not in ('deposit', 'withdraw', 'show_bank_statement'):
+        raise UnknownCommand
+
+    return command_name, command_args
+
+
 def print_help() -> None:
     """Функция вывода подсказок"""
     print('''
@@ -21,6 +38,10 @@ Commands:
 def main():
     print('Service started!')
     print_help()
+
+    while True:
+        command_line = input('> ').strip()
+        command_name, command_args = parse(command_line)
 
 
 if __name__ == '__main__':
