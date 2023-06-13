@@ -4,3 +4,7 @@ class MissedCommandName(Exception):
 
 class UnknownCommand(Exception):
     """Entered unknown command."""
+
+
+class DepositAmountMustBeNumber(Exception):
+    """Amount must be a positive integer number."""

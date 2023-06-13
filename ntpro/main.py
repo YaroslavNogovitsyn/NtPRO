@@ -1,4 +1,19 @@
-from ntpro.extensions import MissedCommandName, UnknownCommand
+from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber
+from ntpro.validators import validate_amount
+
+
+def find_args(keywords: list) -> bool | dict:
+    """Парсинг и сохранение значений"""
+
+    dct = {}
+    for elem in keywords:
+        key, value = elem.strip('-').replace('"', '').split('=')
+        if key == 'amount':
+            if not validate_amount(value):
+                raise DepositAmountMustBeNumber
+            value = int(value)
+        dct[key] = value
+    return dct
 
 
 def parse(command_line: str) -> (str, list[str]):
@@ -42,6 +57,7 @@ def main():
     while True:
         command_line = input('> ').strip()
         command_name, command_args = parse(command_line)
+        args = find_args(command_args)
 
 
 if __name__ == '__main__':
