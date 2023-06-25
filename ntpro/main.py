@@ -1,4 +1,5 @@
 from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber
+from ntpro.utils import get_client
 from ntpro.validators import validate_amount
 
 
@@ -53,11 +54,14 @@ Commands:
 def main():
     print('Service started!')
     print_help()
+    clients = {}
 
     while True:
         command_line = input('> ').strip()
         command_name, command_args = parse(command_line)
         args = find_args(command_args)
+        client = get_client(args.pop('client'), clients)
+        print(client, clients)
 
 
 if __name__ == '__main__':

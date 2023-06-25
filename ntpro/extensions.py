@@ -8,3 +8,7 @@ class UnknownCommand(Exception):
 
 class DepositAmountMustBeNumber(Exception):
     """Amount must be a positive integer number."""
+
+
+class MissedClientName(Exception):
+    """Didnt entered a client name."""
