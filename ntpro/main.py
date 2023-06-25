@@ -1,4 +1,4 @@
-from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber
+from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName
 from ntpro.utils import get_client
 from ntpro.validators import validate_amount
 
@@ -57,11 +57,20 @@ def main():
     clients = {}
 
     while True:
-        command_line = input('> ').strip()
-        command_name, command_args = parse(command_line)
-        args = find_args(command_args)
-        client = get_client(args.pop('client'), clients)
-        print(client, clients)
+        try:
+            command_line = input('> ').strip()
+            command_name, command_args = parse(command_line)
+            args = find_args(command_args)
+            client = get_client(args.pop('client'), clients)
+
+        except MissedCommandName as ex:
+            print(ex.__doc__)
+        except UnknownCommand as ex:
+            print(ex.__doc__)
+        except DepositAmountMustBeNumber as ex:
+            print(ex.__doc__)
+        except MissedClientName as ex:
+            print(ex.__doc__)
 
 
 if __name__ == '__main__':
