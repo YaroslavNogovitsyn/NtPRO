@@ -19,6 +19,10 @@ class Client:
         self.__balance: float = balance
         self.__operations: list = []
 
+    @property
+    def operations(self):
+        return self.__operations
+
     def __add_operation(self, operation_name: str, amount: float, description: str) -> None:
         self.__operations.append(Operation(
             amount=amount,

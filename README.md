@@ -51,5 +51,5 @@ pip install -r requirements.txt
 
 5.Для активации запустите файл:
 ```bash
-bank.py
+main.py
 ```

@@ -16,3 +16,7 @@ class MissedClientName(Exception):
 
 class InsufficientFunds(Exception):
     """Insufficient funds to withdraw"""
+
+
+class InvalidDateFormat(Exception):
+    """Entered invalid date format."""

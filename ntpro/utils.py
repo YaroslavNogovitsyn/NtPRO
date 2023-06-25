@@ -1,6 +1,8 @@
 from ntpro.client import Client
 from ntpro.constants import CommandList
 from ntpro.extensions import MissedClientName
+from ntpro.statement_table import BankStatementTable
+from ntpro.validators import validate_date
 
 
 def get_client(name: str, clients: dict[str, Client]) -> Client:
@@ -22,4 +24,7 @@ def do_command(client: Client, command: str, args: dict) -> str | None:
         client.withdraw(**args)
         return 'Withdrawal operation was successful!'
 
-    # здесь будет логика вызова show_bank_statement
+    if command == CommandList.show_bank_statement:
+        kwargs = {key: validate_date(args.pop(key, '')) for key in ('since', 'till')}
+        statement_table = BankStatementTable(client.operations)
+        print(statement_table.get(**kwargs))
