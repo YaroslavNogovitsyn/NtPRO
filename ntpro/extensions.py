@@ -20,3 +20,12 @@ class InsufficientFunds(Exception):
 
 class InvalidDateFormat(Exception):
     """Entered invalid date format."""
+
+
+class MissedOperations(Exception):
+    def __init__(self, since, till):
+        self.since = since
+        self.till = till
+
+    def __str__(self):
+        return f"""For this period(since {self.since} - till {self.till}) this client did not have any transactions'"""

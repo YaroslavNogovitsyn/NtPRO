@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from ntpro.client import Client
 from ntpro.constants import CommandList
 from ntpro.extensions import MissedClientName

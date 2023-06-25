@@ -11,7 +11,7 @@ def validate_amount(amount: str) -> bool:
 def validate_date(date: str) -> datetime:
     try:
         date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
-    except ValueError as e:
+    except ValueError:
         raise InvalidDateFormat
 
     if not date:

@@ -39,4 +39,4 @@ class Client:
         if self.__balance < amount:
             raise InsufficientFunds
         self.__balance -= amount
-        self.__add_operation(CommandList.deposit, amount, description)
+        self.__add_operation(CommandList.withdraw, amount, description)

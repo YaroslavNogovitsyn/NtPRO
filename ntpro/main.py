@@ -1,5 +1,5 @@
 from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName, \
-    InsufficientFunds, InvalidDateFormat
+    InsufficientFunds, InvalidDateFormat, MissedOperations
 from ntpro.utils import get_client, do_command
 from ntpro.validators import validate_amount
 
@@ -83,6 +83,8 @@ def main():
             print(ex.__doc__)
         except InvalidDateFormat as ex:
             print(ex.__doc__)
+        except MissedOperations as ex:
+            print(ex)
         except KeyboardInterrupt:
             break
 
