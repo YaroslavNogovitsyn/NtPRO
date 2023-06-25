@@ -11,4 +11,8 @@ class DepositAmountMustBeNumber(Exception):
 
 
 class MissedClientName(Exception):
-    """Didnt entered a client name."""
+    """Didn't enter a client name."""
+
+
+class InsufficientFunds(Exception):
+    """Insufficient funds to withdraw"""

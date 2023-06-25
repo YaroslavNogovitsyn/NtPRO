@@ -1,5 +1,6 @@
-from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName
-from ntpro.utils import get_client
+from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName, \
+    InsufficientFunds
+from ntpro.utils import get_client, do_command
 from ntpro.validators import validate_amount
 
 
@@ -12,7 +13,7 @@ def find_args(keywords: list) -> bool | dict:
         if key == 'amount':
             if not validate_amount(value):
                 raise DepositAmountMustBeNumber
-            value = int(value)
+            value = float(value)
         dct[key] = value
     return dct
 
@@ -58,10 +59,15 @@ def main():
 
     while True:
         try:
-            command_line = input('> ').strip()
-            command_name, command_args = parse(command_line)
+            command_name, command_args = parse(input('> ').strip())
+            if command_name.lower() == 'exit':
+                break
+
             args = find_args(command_args)
-            client = get_client(args.pop('client'), clients)
+            client = get_client(args.pop('client', None), clients)
+
+            if info := do_command(client, command_name, args):
+                print(info)
 
         except MissedCommandName as ex:
             print(ex.__doc__)
@@ -71,6 +77,12 @@ def main():
             print(ex.__doc__)
         except MissedClientName as ex:
             print(ex.__doc__)
+        except TypeError as ex:
+            print(ex)
+        except InsufficientFunds as ex:
+            print(ex.__doc__)
+        except KeyboardInterrupt:
+            break
 
 
 if __name__ == '__main__':
