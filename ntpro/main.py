@@ -3,6 +3,8 @@ from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMus
 from ntpro.utils import get_client, do_command
 from ntpro.validators import validate_amount
 
+import logging
+
 
 def find_args(keywords: list) -> bool | dict:
     """Парсинг и сохранение значений"""
@@ -67,27 +69,33 @@ def main():
             client = get_client(args.pop('client', None), clients)
 
             if info := do_command(client, command_name, args):
-                print(info)
+                logging.info(info)
 
         except MissedCommandName as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except UnknownCommand as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except DepositAmountMustBeNumber as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except MissedClientName as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except TypeError as ex:
-            print(ex)
+            logging.error(ex.__doc__)
         except InsufficientFunds as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except InvalidDateFormat as ex:
-            print(ex.__doc__)
+            logging.error(ex.__doc__)
         except MissedOperations as ex:
-            print(ex)
+            logging.error(ex)
         except KeyboardInterrupt:
+            logging.info('Finish')
             break
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        format='%(asctime)s - %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S',
+    )
     main()
