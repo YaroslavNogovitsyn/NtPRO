@@ -13,9 +13,7 @@ def find_args(keywords: list) -> bool | dict:
     for elem in keywords:
         key, value = elem.strip('-').replace('"', '').split('=')
         if key == 'amount':
-            if not validate_amount(value):
-                raise DepositAmountMustBeNumber
-            value = float(value)
+            value = validate_amount(value)
         dct[key] = value
     return dct
 
@@ -23,7 +21,7 @@ def find_args(keywords: list) -> bool | dict:
 def parse(command_line: str) -> (str, list[str]):
     """Получить название операции и ключевые слова со значениями"""
 
-    command_name, *command_args = commands = command_line.split(' -')
+    command_name, *command_args = commands = command_line.split(' --')
 
     if not command_name:
         raise MissedCommandName
@@ -36,7 +34,7 @@ def parse(command_line: str) -> (str, list[str]):
 
 def print_help() -> None:
     """Функция вывода подсказок"""
-    print('''
+    logging.info('''
 Commands:
 • deposit - 
     required arguments: client (str), amount (float), description (str)
@@ -55,7 +53,7 @@ Commands:
 
 
 def main():
-    print('Service started!')
+    logging.info('Service started!')
     print_help()
     clients = {}
 

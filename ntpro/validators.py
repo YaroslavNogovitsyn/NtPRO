@@ -1,11 +1,14 @@
 from datetime import datetime
 
-from ntpro.extensions import InvalidDateFormat
+from ntpro.extensions import InvalidDateFormat, DepositAmountMustBeNumber
 
 
-def validate_amount(amount: str) -> bool:
+def validate_amount(amount: str) -> float:
     """Функция проверки вводимого числа"""
-    return amount.isdigit() and int(amount) > 0
+    try:
+        return float(amount)
+    except (TypeError, ValueError):
+        raise DepositAmountMustBeNumber
 
 
 def validate_date(date: str) -> datetime:
