@@ -2,7 +2,7 @@ from datetime import datetime
 
 import dateparser
 
-from ntpro.extensions import InvalidDateFormat, DepositAmountMustBeNumber
+from ntpro.extensions import DepositAmountMustBeNumber, InvalidDateFormat
 
 
 def validate_amount(amount: str) -> float:

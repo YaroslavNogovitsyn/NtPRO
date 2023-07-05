@@ -1,9 +1,11 @@
-from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName, \
-    InsufficientFunds, InvalidDateFormat, MissedOperations
-from ntpro.utils import get_client, do_command
-from ntpro.validators import validate_amount
-
 import logging
+
+from ntpro.extensions import (DepositAmountMustBeNumber, InsufficientFunds,
+                              InvalidDateFormat, MissedClientName,
+                              MissedCommandName, MissedOperations,
+                              UnknownCommand)
+from ntpro.utils import do_command, get_client
+from ntpro.validators import validate_amount
 
 
 def find_args(keywords: list) -> bool | dict:
@@ -36,17 +38,17 @@ def print_help() -> None:
     """Функция вывода подсказок"""
     logging.info('''
 Commands:
-• deposit - 
+• deposit -
     required arguments: client (str), amount (float), description (str)
-    example: 
+    example:
     deposit --client="John Jones" --amount=100 --description="ATM Deposit"
-• withdraw 
+• withdraw
     required arguments: client (str), amount (float), description (str)
-    example: 
+    example:
     withdraw --client="John Jones" --amount=100 --description="ATM Withdrawal"
-• show_bank_statement 
+• show_bank_statement
     required arguments: client (str), since (str, dateformat %Y-%m-%d %H:%M:%S), till (str, dateformat %Y-%m-%d %H:%M:%S)
-    example: 
+    example:
     show_bank_statement --client="John Jones" --since="2022-03-01 00:00:00" --till="2024-01-01 00:00:00"
 • exit
 ''')

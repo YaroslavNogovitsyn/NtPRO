@@ -5,8 +5,10 @@ from prettytable import PrettyTable
 
 from ntpro.client import Client, Operation
 from ntpro.constants import CommandList
-from ntpro.extensions import MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, InvalidDateFormat, \
-    MissedClientName, MissedOperations, InsufficientFunds
+from ntpro.extensions import (DepositAmountMustBeNumber, InsufficientFunds,
+                              InvalidDateFormat, MissedClientName,
+                              MissedCommandName, MissedOperations,
+                              UnknownCommand)
 from ntpro.main import parse
 from ntpro.statement_table import BankStatementTable
 from ntpro.utils import get_client
