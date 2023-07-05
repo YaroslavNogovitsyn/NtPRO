@@ -31,7 +31,7 @@ show_bank_statement --client="John Jones" --since="2023-05-29 00:00:00" --till="
 1.Склонируйте к себе данный репозиторий при помощи команды:
 
 ```bash
-git clone https://github.com/
+git clone https://github.com/YaroslavNogovitsyn/NtPRO
 ```
 
 2.Выполните команду для создания виртуального окружения:
