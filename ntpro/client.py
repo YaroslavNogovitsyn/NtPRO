@@ -23,6 +23,14 @@ class Client:
     def operations(self):
         return self.__operations
 
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def balance(self):
+        return self.__balance
+
     def __add_operation(self, operation_name: str, amount: float, description: str) -> None:
         self.__operations.append(Operation(
             amount=amount,

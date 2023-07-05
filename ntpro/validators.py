@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import dateparser
+
 from ntpro.extensions import InvalidDateFormat, DepositAmountMustBeNumber
 
 
@@ -13,7 +15,7 @@ def validate_amount(amount: str) -> float:
 
 def validate_date(date: str) -> datetime:
     try:
-        date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+        date = dateparser.parse(date)
     except ValueError:
         raise InvalidDateFormat
 
