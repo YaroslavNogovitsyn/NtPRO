@@ -28,6 +28,10 @@ show_bank_statement --client="John Jones" --since="2023-05-29 00:00:00" --till="
 
 # Установка:
 
+### Необходимые инструменты и технологии
+
+- [Python 3.10+](https://www.python.org/)
+
 1.Склонируйте к себе данный репозиторий при помощи команды:
 
 ```bash
@@ -40,5 +44,5 @@ poetry install
 ```
 3.Для активации запустите файл:
 ```bash
-main.py
+python main.py
 ```
