@@ -71,19 +71,8 @@ def main():
             if info := do_command(client, command_name, args):
                 logging.info(info)
 
-        except MissedCommandName as ex:
-            logging.error(ex.__doc__)
-        except UnknownCommand as ex:
-            logging.error(ex.__doc__)
-        except DepositAmountMustBeNumber as ex:
-            logging.error(ex.__doc__)
-        except MissedClientName as ex:
-            logging.error(ex.__doc__)
-        except TypeError as ex:
-            logging.error(ex.__doc__)
-        except InsufficientFunds as ex:
-            logging.error(ex.__doc__)
-        except InvalidDateFormat as ex:
+        except (MissedCommandName, UnknownCommand, DepositAmountMustBeNumber, MissedClientName,
+                TypeError, InsufficientFunds, InvalidDateFormat) as ex:
             logging.error(ex.__doc__)
         except MissedOperations as ex:
             logging.error(ex)
