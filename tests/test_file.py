@@ -92,11 +92,16 @@ class TestStatementTable:
 
     def test_table_right(self):
         assert isinstance(
-            BankStatementTable([Operation(amount=100.0,
-                                          date=datetime(2023, 7, 5, 18, 35, 14, 364800),
-                                          description='ATM Deposit',
-                                          type='deposit')]
-                               ).get(
+            BankStatementTable(
+                [
+                    Operation(
+                        amount=100.0,
+                        date=datetime(2023, 7, 5, 18, 35, 14, 364800),
+                        description='ATM Deposit',
+                        type='deposit'
+                    )
+                ]
+            ).get(
                 datetime(2023, 7, 4, 18, 35, 14, 364800),
                 datetime(2023, 7, 6, 18, 35, 14, 364800),
             ), PrettyTable)

@@ -32,12 +32,14 @@ class Client:
         return self.__balance
 
     def __add_operation(self, operation_name: str, amount: float, description: str) -> None:
-        self.__operations.append(Operation(
-            amount=amount,
-            description=description,
-            date=datetime.now(),
-            type=operation_name,
-        ))
+        self.__operations.append(
+            Operation(
+                amount=amount,
+                description=description,
+                date=datetime.now(),
+                type=operation_name,
+            )
+        )
 
     def deposit(self, amount: float, description: str = '') -> None:
         self.__balance += amount

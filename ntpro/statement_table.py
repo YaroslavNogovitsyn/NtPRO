@@ -24,22 +24,24 @@ class BankStatementTable:
         if operation.type == CommandList.deposit:
             self.__total_deposit += operation.amount
             self.__current_operations.append(
-                [self.datetime_to_str(operation.date),
-                 operation.description,
-                 '',
-                 operation.amount,
-                 self.__total_deposit - self.__total_withdraw
-                 ]
+                [
+                    self.datetime_to_str(operation.date),
+                    operation.description,
+                    '',
+                    operation.amount,
+                    self.__total_deposit - self.__total_withdraw
+                ]
             )
         elif operation.type == CommandList.withdraw:
             self.__total_withdraw += operation.amount
             self.__current_operations.append(
-                [self.datetime_to_str(operation.date),
-                 operation.description,
-                 operation.amount,
-                 '',
-                 self.__total_deposit - self.__total_withdraw
-                 ]
+                [
+                    self.datetime_to_str(operation.date),
+                    operation.description,
+                    operation.amount,
+                    '',
+                    self.__total_deposit - self.__total_withdraw
+                ]
             )
 
     def get(self, since: datetime, till: datetime) -> prettytable:
@@ -56,6 +58,13 @@ class BankStatementTable:
         *transactions, last = self.__current_operations
         table.add_rows(transactions)
         table.add_row(last, divider=True)
-        table.add_row(['', 'Totals', self.__total_withdraw, self.__total_deposit,
-                       self.__total_deposit - self.__total_withdraw])
+        table.add_row(
+            [
+                '',
+                'Totals',
+                self.__total_withdraw,
+                self.__total_deposit,
+                self.__total_deposit - self.__total_withdraw
+            ]
+        )
         return table
